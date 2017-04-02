@@ -1,6 +1,8 @@
 package diary.service;
 
 import diary.domain.Account;
+import diary.repository.AccountRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,11 +18,22 @@ import java.util.List;
  */
 @Service
 public class LoginService implements UserDetailsService {
+    @Autowired
+    private AccountRepository accountRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         List<GrantedAuthority> list = new ArrayList<>();
         list.add(new SimpleGrantedAuthority("roleA"));
-        return new Account("user","$2a$10$8dA16X9U1mZpX/HWQh1ofuYmevWe4ao8tKba0YiaLBlUbdCx/84dO",list);
+        //return new Account("user01","$2a$10$XAVqnVb6TFhgiWgVxJlLy.BF5SdorrEa.mpT3mkVALJ1EarKuaCg2",list);
+        Account account = accountRepository.findByUserId(username);
+
+        if(account==null){
+            throw new UsernameNotFoundException("UsernameNotFoundException");
+        }
+
+        Account account2 = new Account(username,account.getPassword(),list);
+
+        return account2;
     }
 }

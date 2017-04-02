@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.User;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -15,9 +16,15 @@ import java.util.Collection;
 public class Account extends User {
     @Id
     private String userId;
+    private String password;
+
+    public Account(){
+        this("a","a", new ArrayList<GrantedAuthority>());
+    }
 
     public Account(String username, String password, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, true, true, true, true, authorities);
+        this.password = password;
     }
 
     public String getUserId() {
@@ -27,4 +34,13 @@ public class Account extends User {
     public void setUserId(String userId) {
         this.userId = userId;
     }
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
 }

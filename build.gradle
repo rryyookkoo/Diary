@@ -50,5 +50,9 @@ dependencies {
 }
 
 task encode <<{
-    println new org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder().encode("pass")
+    println new org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder().encode("pass01")
+    println new org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder().encode("pass02")
+    println new org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder().encode("pass03")
+    println new org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder().encode("pass04")
+    println new org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder().encode("pass05")
 }
