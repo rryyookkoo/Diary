@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html xmlns:th="">
 <head lang="en">
     <meta charset="utf-8"/>
     <title></title>
@@ -10,15 +10,18 @@
 日記管理システム　ログイン
 </b>
 <br/>
+<div style="color:#F00" th:if="${param.error}">
+    ログインに失敗しました！
+</div>
 <br/>
-<form action="" method="post">
+<form th:action="@{/login}" method="post">
 <table>
     <tr>
         <td>
             ユーザID
         </td>
         <td>
-           ：<input type="text"/>
+           ：<input type="text" id="username" name="username"/>
         </td>
     </tr>
     <tr>
@@ -26,7 +29,7 @@
             パスワード
         </td>
         <td>
-            ：<input type="password"/>
+            ：<input type="password" id="password" name="password"/>
         </td>
     </tr>
 </table>
