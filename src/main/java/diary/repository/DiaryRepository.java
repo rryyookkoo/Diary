@@ -11,7 +11,7 @@ import java.util.List;
 public interface DiaryRepository extends JpaRepository<Diary, Integer> {
     Diary findById(Integer id);
 
-    List<Diary> findByIsPublicOrderByCreatedAtDesc(Integer isPublic);
+    List<Diary> findByIsPublicOrderByCreatedAtDesc(boolean isPublic);
 
     List<Diary> findByUserIdOrderByCreatedAtDesc(String userId);
 }

@@ -11,10 +11,11 @@ import java.util.Date;
 public class Diary {
     @Id
     private int id;
-    private int isPublic;
+    private boolean isPublic;
     private Date createdAt;
     private String userId;
     private String title;
+    private String content;
 
     public String getContent() {
         return content;
@@ -31,9 +32,6 @@ public class Diary {
     public void setTitle(String title) {
         this.title = title;
     }
-
-    private String content;
-
 
     public String getUserId() {
         return userId;
@@ -59,12 +57,11 @@ public class Diary {
         this.createdAt = createdAt;
     }
 
-    public int getIsPublic() {
+    public boolean isPublic() {
         return isPublic;
     }
 
-    public void setIsPublic(int isPublic) {
+    public void setIsPublic(boolean isPublic) {
         this.isPublic = isPublic;
     }
-
 }

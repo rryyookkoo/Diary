@@ -15,7 +15,7 @@ public class IndexService {
     @Autowired
     private DiaryRepository diaryRepository;
 
-    public List<Diary> findByIsPublicOrderByCreatedAtDesc(Integer isPublic){
+    public List<Diary> findByIsPublicOrderByCreatedAtDesc(boolean isPublic){
         return diaryRepository.findByIsPublicOrderByCreatedAtDesc(isPublic);
     }
 

@@ -17,24 +17,14 @@ public class IndexController {
     @Autowired
     IndexService indexService;
 
-//    @RequestMapping(method = RequestMethod.GET)
-//    String list(Model model) {
-//        List<Customer> customers = customerService.findAll();
-//        model.addAttribute("customers", customers);
-//        return "customers/list";
-//    }
-
     @RequestMapping("/")
     public String index(Model model){
 
-        List<Diary> publicDiary = indexService.findByIsPublicOrderByCreatedAtDesc(0);
+        List<Diary> publicDiary = indexService.findByIsPublicOrderByCreatedAtDesc(true);
         model.addAttribute("public_diaries", publicDiary);
 
         List<Diary> userDiary = indexService.findByUserIdOrderByCreatedAtDesc("user01");
         model.addAttribute("user_diaries", userDiary);
-
-        System.out.println("public_diaries = " + publicDiary);
-        System.out.println("public_diaries = " + userDiary);
 
         return "index";
     }
