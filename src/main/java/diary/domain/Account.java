@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * Created by ryoko on 17/04/02.
@@ -17,6 +18,15 @@ public class Account extends User {
     @Id
     private String userId;
     private String password;
+    private Date createdAt;
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
 
     public Account(){
         this("a","a", new ArrayList<GrantedAuthority>());

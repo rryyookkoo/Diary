@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
     <meta charset="UTF-8"/>
     <title></title>
@@ -28,6 +28,11 @@
                 作成ユーザID
             </th>
         </tr>
+        <tr th:each="public_diary : ${public_diaries}">
+            <td th:text="${public_diary.title}"></td>
+            <td th:text="${public_diary.createdAt}"></td>
+            <td th:text="${public_diary.userId}"></td>
+        </tr>
     </table>
 </div>
 <br/>
@@ -42,6 +47,10 @@
             <th width="300">
                 作成日
             </th>
+        </tr>
+        <tr th:each="user_diary : ${user_diaries}">
+            <td th:text="${user_diary.title}"></td>
+            <td th:text="${user_diary.createdAt}"></td>
         </tr>
     </table>
 </div>
