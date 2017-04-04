@@ -13,11 +13,14 @@
     <input type="button" name="change_pass" id="change_pass" value="パスワード変更" onclick=""/>
     <input type="button" name="logout" id="logout" value="ログアウト" onclick=""/>
 </div>
-<br/>
-<div align="center">
+<div>
+    <input type="button" name="create_diary" id="create_diary" value="日記を書く" onclick=""/>
+</div>
+<div>
+    <br/>
     新着一覧<br/>
     <table>
-        <tr>
+        <tr align="left">
             <th width="500">
                 タイトル
             </th>
@@ -30,17 +33,17 @@
         </tr>
         <tr th:each="public_diary : ${public_diaries}">
             <td th:text="${public_diary.title}"></td>
-            <td th:text="${public_diary.createdAt}"></td>
+            <td th:text="${#dates.format(public_diary.createdAt,'yyyy/MM/dd')}"></td>
             <td th:text="${public_diary.userId}"></td>
         </tr>
     </table>
 </div>
 <br/>
 <br/>
-<div align="center">
-   さんの日記<br/>
+<div>
+    <p th:text="${userId}"></p>
     <table>
-        <tr>
+        <tr align="left">
             <th width="500">
                 タイトル
             </th>
@@ -50,7 +53,7 @@
         </tr>
         <tr th:each="user_diary : ${user_diaries}">
             <td th:text="${user_diary.title}"></td>
-            <td th:text="${user_diary.createdAt}"></td>
+            <td th:text="${#dates.format(user_diary.createdAt,'yyyy/MM/dd')}"></td>
         </tr>
     </table>
 </div>
