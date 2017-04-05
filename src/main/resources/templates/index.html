@@ -14,12 +14,15 @@
     <input type="button" name="logout" id="logout" value="ログアウト" onclick=""/>
 </div>
 <div>
-    <input type="button" name="create_diary" id="create_diary" value="日記を書く" onclick=""/>
+    <a href="/diary/create" th:href="@{/diary/create}">日記を書く</a>
 </div>
 <div>
     <br/>
     新着一覧<br/>
-    <table>
+    <div style="color:#F00" th:if="${#lists.isEmpty(public_diaries)}">
+       表示する日記がありません
+    </div>
+    <table th:unless="${#lists.isEmpty(public_diaries)}">
         <tr align="left">
             <th width="500">
                 タイトル
@@ -41,7 +44,7 @@
 <br/>
 <br/>
 <div>
-    <p th:text="${userId}"></p>
+    <div><span th:text="${userId}"></span>さんの日記</div>
     <table>
         <tr align="left">
             <th width="500">

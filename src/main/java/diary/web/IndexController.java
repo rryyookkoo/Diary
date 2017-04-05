@@ -33,7 +33,7 @@ public class IndexController {
             userId = principal.toString();
         }
 
-        model.addAttribute("userId", userId + "さんの日記");
+        model.addAttribute("userId", userId);
 
         //新着の日記一覧の取得
         List<Diary> publicDiary = indexService.findByIsPublicOrderByCreatedAtDesc(true);
