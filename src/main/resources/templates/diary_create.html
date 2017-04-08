@@ -12,17 +12,35 @@
 <br/>
 <br/>
 <div align="center">
-    <form th:action="@{/diary/do_create}" method="post">
+    <form th:action="@{/diary/do_create}" th:object="${diaryCreateForm}" method="post">
         タイトル（５０字以内）<br/>
-        <input type="text" name="title" id="title" size="150" maxlength="50"/><br/>
+        <input type="text" th:field="*{title}" name="title" id="title" size="150" maxlength="50"/><br/>
         <br/>
         本文（４０００字以内）<br/>
-        <textarea cols="150" rows="30" maxlength="4000"></textarea><br/>
-        <input type="radio" name="is_public" value="public" checked="checked"/>公開
-        <input type="radio" name="is_public" value="private"/>非公開<br/>
-        <input type="button" value="キャンセル"/>
+        <textarea th:field="*{content}" id="content" cols="150" rows="30" maxlength="4000"></textarea><br/>
+        <input type="radio" th:field="*{isPublic}" th:value="1"/>公開
+        <input type="radio" th:field="*{isPublic}" th:value="0"/>非公開<br/>
+        <input type="button" value="キャンセル" onclick="clickCancel()"/>
         <input type="submit" value="保存"/>
     </form>
 </div>
+<script>
+/*<![CDATA[*/
+    function clickCancel(){
+        if(document.getElementById("title").value == "" && document.getElementById("content").value ==""){
+            window.history.back(-1);
+            return false;
+        }else{
+            result = confirm("入力の途中ですが前の画面に戻ってよろしいですか？");
+            if(result){
+                window.history.back(-1);
+                return false;
+            }else{
+
+            }
+        }
+    }
+/*]]>*/
+</script>
 </body>
 </html>

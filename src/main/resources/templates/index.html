@@ -10,8 +10,8 @@
     日記管理システム　トップページ
 </b>
 <div align="right">
-    <input type="button" name="change_pass" id="change_pass" value="パスワード変更" onclick=""/>
-    <input type="button" name="logout" id="logout" value="ログアウト" onclick=""/>
+    <a href="/password/change" th:href="@{/password/change}">パスワード変更</a>
+    <a href="/logout" th:href="@{/logout}">ログアウト</a>
 </div>
 <div>
     <a href="/diary/create" th:href="@{/diary/create}">日記を書く</a>

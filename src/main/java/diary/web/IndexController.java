@@ -48,6 +48,15 @@ public class IndexController {
         List<Diary> userDiary = indexService.findByUserIdOrderByCreatedAtDesc(userId);
         model.addAttribute("user_diaries", userDiary);
 
+        for(Diary diary : userDiary){
+            System.out.println("id = " + diary.getId());
+            System.out.println("title = " + diary.getTitle());
+            System.out.println("createdAt = " + diary.getCreatedAt());
+            System.out.println("isPublic = " + diary.isPublic());
+            System.out.println("userId = " + diary.getUserId());
+        }
+        System.out.println("userDiary = " + userDiary);
+
         return "index";
     }
 }

@@ -1,7 +1,11 @@
 package diary.domain;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -10,12 +14,24 @@ import java.util.Date;
 @Entity
 public class Diary {
     @Id
+    @GeneratedValue
     private int id;
     private boolean isPublic;
     private Date createdAt;
     private String userId;
     private String title;
     private String content;
+
+    public Diary() {
+    }
+
+    public Diary(String title, String content, boolean isPublic,String userId, Date createdAt) {
+        this.title = title;
+        this.content = content;
+        this.isPublic = isPublic;
+        this.userId = userId;
+        this.createdAt = createdAt;
+    }
 
     public String getContent() {
         return content;
@@ -64,4 +80,5 @@ public class Diary {
     public void setIsPublic(boolean isPublic) {
         this.isPublic = isPublic;
     }
+
 }
