@@ -56,13 +56,14 @@ public class PasswordChangeController {
         System.out.println("currentPass = " + passwordChangeForm.getCurrentPass());
 
         //エラーチェック
-        if (new BCryptPasswordEncoder().matches(passwordChangeForm.getCurrentPass(),password)) {
+        if (new BCryptPasswordEncoder().matches(passwordChangeForm.getCurrentPass(), password)) {
             if (passwordChangeForm.getNewPass().equals(passwordChangeForm.getNewPass2())){
                 if (passwordChangeForm.getNewPass().length() >= 8){
                     if (passwordChangeForm.getNewPass().matches("[0-9a-zA-Z-_]+")){
                         //エラーなし
+                        String encodedPass = new BCryptPasswordEncoder().encode(passwordChangeForm.getNewPass());
                         Account account = passwordChangeService.findByUserId(userId);
-                        account.setPassword(passwordChangeForm.getNewPass());
+                        account.setPassword(encodedPass);
                         this.passwordChangeService.save(account);
                     } else {
                         //半角英数字、-、_以外の場合エラー
