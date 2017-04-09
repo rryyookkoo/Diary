@@ -13,5 +13,8 @@ public class DiaryService {
     @Autowired
     DiaryRepository diaryRepository;
 
+    public Diary save(Diary diary){
+        return diaryRepository.save(diary);
+    }
 
 }

@@ -1,7 +1,7 @@
 package diary.web;
 
 import diary.domain.Diary;
-import diary.repository.DiaryRepository;
+import diary.service.DiaryService;
 import diary.web.model.DiaryCreateForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,14 +18,14 @@ import java.util.Date;
  */
 @Controller
 public class DiaryController {
-    @Autowired
-    DiaryRepository diaryRepository;
 
     @RequestMapping("/diary/create")
     public String diaryCreate(@ModelAttribute DiaryCreateForm diaryCreateForm, Model model){
         return "diary_create";
     }
 
+    @Autowired
+    DiaryService diaryService;
     @Autowired
     IndexController indexController;
 
@@ -54,7 +54,7 @@ public class DiaryController {
             isPublic = false;
         }
 
-        Diary diary = this.diaryRepository
+        Diary diary = diaryService
                 .save(new Diary(diaryCreateForm.getTitle(), diaryCreateForm.getContent(), isPublic, userId, date));
 
         model.addAttribute("DiaryCreateForm", new DiaryCreateForm());
