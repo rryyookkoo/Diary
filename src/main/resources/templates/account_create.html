@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="">
 <head lang="en">
     <meta charset="UTF-8"/>
     <title></title>
@@ -11,5 +11,34 @@
 </b>
 <br/>
 <br/>
+<form th:action="@{/account/do_create}" th:object="${accountCreateForm}" method="post">
+    <table>
+        <tr>
+            <td>
+               ユーザID
+            </td>
+            <td>
+                ：<input type="text" th:field="*{userId}" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                パスワード
+            </td>
+            <td>
+                ：<input type="password" th:field="*{password}" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                パスワード（確認）
+            </td>
+            <td>
+                ：<input type="password2" th:field="*{password2}" />
+            </td>
+        </tr>
+    </table>
+    <input type="submit" value="登録"/>
+</form>
 </body>
 </html>
