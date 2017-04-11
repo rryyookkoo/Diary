@@ -37,6 +37,13 @@ public class Account extends User {
         this.password = password;
     }
 
+    public Account(String userId, String password, Date createdAt){
+        super("super","super",true,true,true,true,new ArrayList<GrantedAuthority>());
+        this.userId = userId;
+        this.password = password;
+        this.createdAt = createdAt;
+    }
+
     public String getUserId() {
         return userId;
     }
