@@ -13,6 +13,9 @@
 <div style="color:#F00" th:if="${param.error}">
     ログインに失敗しました！
 </div>
+<div style="color:#F00" th:if="${account}">
+   新しいアカウントが登録されました。
+</div>
 <br/>
 <form th:action="@{/login}" method="post">
 <table>

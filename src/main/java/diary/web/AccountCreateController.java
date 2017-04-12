@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -31,23 +32,40 @@ public class AccountCreateController {
     }
     @RequestMapping("/account/do_create")
     public String accountDoCreate(@ModelAttribute AccountCreateForm diaryCreateForm, Model model){
-        //check
-        
+        List<String> errorMessages = new ArrayList<>();
 
-        //insert
-        String encodedPass = new BCryptPasswordEncoder().encode(diaryCreateForm.getPassword());
-        Account account = accountCreateService
-                .save(new Account(diaryCreateForm.getUserId(), encodedPass, new Date()));
-
-        List<Account> accounts = accountRepository.findAll();
-
-        System.out.println("encodedPass = " + encodedPass);
-        for(Account account2 : accounts){
-            System.out.println("userId = " + account2.getUserId());
-            System.out.println("password = " + account2.getPassword());
-            System.out.println("createdAt = " + account2.getCreatedAt());
+        //ユーザIDが登録済みの場合はエラー
+        Account account = accountCreateService.findByUserId(diaryCreateForm.getUserId());
+        if(account != null) {
+            errorMessages.add("すでに使用されているユーザIDです。");
         }
 
-        return "login";
+        //パスワードが8文字未満の場合はエラー
+        if(diaryCreateForm.getPassword().length() < 8){
+            errorMessages.add("パスワードは8文字以上で設定してください。");
+        }
+
+        //パスワード、パスワード（確認）が一致しない場合エラー
+        if(!diaryCreateForm.getPassword().equals(diaryCreateForm.getPassword2())){
+            errorMessages.add("パスワードとパスワード（確認）が一致しません。");
+        }
+
+        //半角英数字、-、_以外の場合エラー
+        if (!diaryCreateForm.getPassword().matches("[0-9a-zA-Z-_]+")){
+            errorMessages.add("使用できる文字は、半角英数字、「-」、「_」のみです。");
+        }
+
+        if(errorMessages.size() > 0 ){
+            model.addAttribute("error_messages", errorMessages);
+            return "account_create";
+        }else {
+            //insert
+            String encodedPass = new BCryptPasswordEncoder().encode(diaryCreateForm.getPassword());
+            Account a = accountCreateService
+                    .save(new Account(diaryCreateForm.getUserId(), encodedPass, new Date()));
+
+            model.addAttribute("account", true);
+            return "login";
+        }
     }
 }
