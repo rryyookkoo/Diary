@@ -35,7 +35,9 @@
             </th>
         </tr>
         <tr th:each="public_diary : ${public_diaries}">
-            <td th:text="${public_diary.title}"></td>
+            <td>
+                <a href="/diary/view" th:href="@{/diary/view/{id}(id=${public_diary.id})}" th:text="${public_diary.title}"></a>
+            </td>
             <td th:text="${#dates.format(public_diary.createdAt,'yyyy/MM/dd')}"></td>
             <td th:text="${public_diary.userId}"></td>
         </tr>

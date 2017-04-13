@@ -25,6 +25,15 @@ public class Diary {
     public Diary() {
     }
 
+    public Diary(int id, String title, String content, boolean isPublic,String userId, Date createdAt) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.isPublic = isPublic;
+        this.userId = userId;
+        this.createdAt = createdAt;
+    }
+
     public Diary(String title, String content, boolean isPublic,String userId, Date createdAt) {
         this.title = title;
         this.content = content;
