@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head lang="en">
     <meta charset="UTF-8"/>
     <title></title>
@@ -9,5 +9,26 @@
 <b>
     日記管理システム　日記を見る
 </b>
+<br/>
+<br/>
+<div>
+    ＜タイトル＞
+    <div th:text="${title}" />
+</div>
+<br/>
+<div>
+    ＜作成日＞
+    <div th:text="${#dates.format(createdAt,'yyyy/MM/dd')}" />
+</div>
+<br/>
+<div>
+    ＜作成ユーザID＞
+    <div th:text="${userId}" />
+</div>
+<br/>
+<div>
+    ＜本文＞
+    <div th:text="${content}" />
+</div>
 </body>
 </html>

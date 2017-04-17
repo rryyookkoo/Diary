@@ -66,9 +66,15 @@ public class DiaryController {
     }
 
     @RequestMapping("/diary/view/{id}")
-    public String diaryView(@PathVariable("id") String id){
+    public String diaryView(@PathVariable("id") int id, Model model){
 
-        System.out.println("id = " + id);
+        Diary diary = diaryService.findById(id);
+
+        model.addAttribute("title", diary.getTitle());
+        model.addAttribute("createdAt", diary.getCreatedAt());
+        model.addAttribute("userId", diary.getUserId());
+        model.addAttribute("content", diary.getContent());
+
         return "diary_view";
     }
 

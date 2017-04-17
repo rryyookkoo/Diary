@@ -17,4 +17,8 @@ public class DiaryService {
         return diaryRepository.save(diary);
     }
 
+    public Diary findById(int id){
+        return diaryRepository.findById(id);
+    }
+
 }
